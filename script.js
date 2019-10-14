@@ -19,20 +19,28 @@ window.addEventListener("load", function() {
       }
    
       if (isNaN(pilotNameInput.value) && isNaN(copilotNameInput.value)) {
-         console.log(cargoWeightInput.value);
+         function faultyItemsVisible(){
+         const faultyItems = document.getElementById("faultyItems");
+         faultyItems.style.visibility = "visible";
+         }
+
       } else {
       alert("Please enter a name with no numbers for the Pilot and Co-pilot's names.");
       event.preventDefault();
       } 
+   
 
 
-
-      console.log(typeof(pilotNameInput.value));
-      console.log(typeof(copilotNameInput.value));
-      console.log(typeof(fuelLevelInput.value));
+      // console.log(typeof(pilotNameInput.value));
+      // console.log(typeof(copilotNameInput.value));
+      // console.log(typeof(fuelLevelInput.value));
      
 
    });
+
+
+
+
 
    // let button = document.getElementById("formSubmit");
    // button.addEventListener("click", function() {
@@ -44,8 +52,8 @@ window.addEventListener("load", function() {
    //    let launchStatusUpdate = document.getElementById("launchStatus");
    //    launchStatusUpdate.style.color = "red"; 
 
-   //    let pilotStatusUpdate = document.getElementById("pilotStatus");
-   //    pilotStatusUpdate.innerHTML += `Pilot ${pilotNameInput.value} is ready for launch.`;
+   // let pilotStatusUpdate = document.getElementById("pilotStatus");
+   // pilotStatusUpdate.innerHTML += `Pilot ${pilotNameInput.value} is ready for launch.`;
 
    //    let coPilotStatusUpdate = document.getElementById("copilotStatus");
    //    coPilotStatusUpdate.innerHTML += `<li>Co-pilot ${copilotNameInput.value} is ready for launch.</li>`;
