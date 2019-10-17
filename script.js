@@ -19,27 +19,49 @@ window.addEventListener("load", function() {
       }
    
       if (isNaN(pilotNameInput.value) && isNaN(copilotNameInput.value)) {
-         function faultyItemsVisible(){
-         const faultyItems = document.getElementById("faultyItems");
-         faultyItems.style.visibility = "visible";
-         }
+         if (fuelLevelInput < 10000 || cargoWeightInput > 10000) {
+            let faultyItems = document.getElementById("faultyItems");
+            faultyItems.style.visibility = "visible";
+            
+            let pilotStatusUpdate = document.getElementById("pilotStatus");
+            let coPilotStatusUpdate = document.getElementById("copilotStatus");
+            let launchStatusUpdate = document.getElementById("launchStatus");
+   
+            faultyItems.innerHTML = `
+            <ol id="checkList">
+            <li>Pilot ${pilotNameInput.value} is ready for launch.</li>
+            <li>Co-pilot ${copilotNameInput.value} is ready for launch.</li>
+            </ol>`
 
+            launchStatusUpdate.innerHTML = "Shuttle is not ready for launch"
+            launchStatusUpdate.style.color = "red"; 
+            
+            let checkList = document.getElementById("checkList");
+
+            if (fuelLevelInput < 10000) {
+            checkList.innerHTML += `<li>Fuel level too low for launch.</li>`;
+            }
+
+            if (cargoWeightInput > 10000) {
+               checkList.innerHTML += `<li>Cargo mass too high for launch.</li>`;
+            }
+            alert("!"); 
+         } else {
+            launchStatusUpdate.innerHTML = "Shuttle is ready for launch"
+            launchStatusUpdate.style.color = "green";  
+         }
+ 
       } else {
       alert("Please enter a name with no numbers for the Pilot and Co-pilot's names.");
       event.preventDefault();
       } 
-   
-
 
       // console.log(typeof(pilotNameInput.value));
       // console.log(typeof(copilotNameInput.value));
       // console.log(typeof(fuelLevelInput.value));
-     
+
 
    });
-
-
-
 
 
    // let button = document.getElementById("formSubmit");
@@ -49,14 +71,9 @@ window.addEventListener("load", function() {
    //    let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
    //    let cargoWeightInput = document.querySelector("input[name=cargoWeight]");
       
-   //    let launchStatusUpdate = document.getElementById("launchStatus");
-   //    launchStatusUpdate.style.color = "red"; 
 
-   // let pilotStatusUpdate = document.getElementById("pilotStatus");
-   // pilotStatusUpdate.innerHTML += `Pilot ${pilotNameInput.value} is ready for launch.`;
 
-   //    let coPilotStatusUpdate = document.getElementById("copilotStatus");
-   //    coPilotStatusUpdate.innerHTML += `<li>Co-pilot ${copilotNameInput.value} is ready for launch.</li>`;
+
    // });
 });
 
