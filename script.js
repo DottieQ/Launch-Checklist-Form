@@ -1,4 +1,22 @@
 window.addEventListener("load", function() {
+//    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+//       response.json().then( function(json) {
+      const missionDestination = document.getElementById("missionTarget");
+      missionDestination.innerHTML = "<h2>Mission Destination</h2>"
+//`
+//          <h2>Mission Destination</h2>
+//             <ol>
+//                <li>Name: ${json.name[0]}</li>
+//                <li>Diameter: ${json.diameter[0]}</li>
+//                <li>Star: ${json.star[0]}</li>
+//                <li>Distance from Earth: ${json.distance[0]}</li>
+//                <li>Number of Moons: ${json.moons[0]}</li>
+//             </ol>
+//             <img src="${json.image[0]}">
+//             `;
+//       });
+
+// });
    let form = document.querySelector("form");
    form.addEventListener("submit", function(event) {
       let pilotNameInput = document.querySelector("input[name=pilotName]");
@@ -35,8 +53,8 @@ window.addEventListener("load", function() {
 
             launchStatusUpdate.innerHTML = "Shuttle is not ready for launch"
             launchStatusUpdate.style.color = "red"; 
-            
-            let checkList = document.getElementById("checkList");
+
+            const checkList = document.getElementById("checkList");
 
             if (fuelLevelInput < 10000) {
             checkList.innerHTML += `<li>Fuel level too low for launch.</li>`;
@@ -56,36 +74,8 @@ window.addEventListener("load", function() {
       event.preventDefault();
       } 
 
-      // console.log(typeof(pilotNameInput.value));
-      // console.log(typeof(copilotNameInput.value));
-      // console.log(typeof(fuelLevelInput.value));
-
-
    });
 
 
-   // let button = document.getElementById("formSubmit");
-   // button.addEventListener("click", function() {
-   //    let pilotNameInput = document.querySelector("input[name=pilotName]");
-   //    let copilotNameInput = document.querySelector("input[name=copilotName]");
-   //    let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-   //    let cargoWeightInput = document.querySelector("input[name=cargoWeight]");
-      
 
-
-
-   // });
 });
-
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${}">
-*/
