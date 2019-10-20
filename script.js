@@ -1,44 +1,45 @@
 window.addEventListener("load", function() {
-   const missionDestination = document.getElementById("missionTarget");
-   missionDestination.innerHTML = 
-   '<div>   <h2>Mission Destination</h2><ol><li>hi</li> </ol>  </div>'
-
-   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
       response.json().then( function(json) {
-`
+         const div = document.getElementById("missionTarget");
+         div.innerHTML = `
+            <h2>Mission Destination</h2>
             <ol>
-               <li>Name: ${json.name[0]}</li>
-               <li>Diameter: ${json.diameter[0]}</li>
-               <li>Star: ${json.star[0]}</li>
-               <li>Distance from Earth: ${json.distance[0]}</li>
-               <li>Number of Moons: ${json.moons[0]}</li>
+               <li>Name:${json[2].name}</li>
+               <li>Diameter: ${json[2].diameter}</li>
+               <li>Star: ${json[2].star}</li>
+               <li>Distance from Earth: ${json[2].distance}</li>
+               <li>Number of Moons: ${json[2].moons}</li>
             </ol>
-            <img src="${json.image[0]}">
+            <img src="${json[2].image}">
             `;
+         });
       });
 
-});
-   let form = document.querySelector("form");
+   
+      let form = document.querySelector("form");
    form.addEventListener("submit", function(event) {
       let pilotNameInput = document.querySelector("input[name=pilotName]");
       let copilotNameInput = document.querySelector("input[name=copilotName]");
       let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
       let cargoWeightInput = document.querySelector("input[name=cargoWeight]");
-      fuelLevelInput = parseInt(fuelLevelInput.value, 10);
-      cargoWeightInput = parseInt(cargoWeightInput.value, 10);
+
 
       if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoWeightInput.value === "") {
          alert("All fields are required!");
+         console.log(pilotNameInput.value);
+         console.log(copilotNameInput.value);
+         console.log(fuelLevelInput.value);
+         console.log(cargoWeightInput.value)
          event.preventDefault();
-      } else if (isNaN(fuelLevelInput) || isNaN(cargoWeightInput)) {         
+      } else if (isNaN(fuelLevelInput.value) || isNaN(cargoWeightInput.value)) {         
          alert("Please enter numbers in the Fuel Level and Cargo Mass fields.");
+         console.log(fuelLevelInput.value);
          event.preventDefault();
       } else if (isNaN(pilotNameInput.value) && isNaN(copilotNameInput.value)) {
          let faultyItems = document.getElementById("faultyItems");
          faultyItems.style.visibility = "visible";
-         if (fuelLevelInput < 10000 || cargoWeightInput > 10000) {
-            let pilotStatusUpdate = document.getElementById("pilotStatus");
-            let coPilotStatusUpdate = document.getElementById("copilotStatus");
+         if (fuelLevelInput.value < 10000 || cargoWeightInput.value > 10000) {
             let launchStatusUpdate = document.getElementById("launchStatus");
    
             faultyItems.innerHTML = `
@@ -52,12 +53,12 @@ window.addEventListener("load", function() {
 
             const checkList = document.getElementById("checkList");
 
-            if (fuelLevelInput < 10000) {
+            if (fuelLevelInput.value < 10000) {
             checkList.innerHTML += `<li>Fuel level too low for launch.</li>`;
             event.preventDefault();
             }
 
-            if (cargoWeightInput > 10000) {
+            if (cargoWeightInput.value > 10000) {
                checkList.innerHTML += `<li>Cargo mass too high for launch.</li>`;
                event.preventDefault();
             }
@@ -67,6 +68,14 @@ window.addEventListener("load", function() {
             let launchStatusUpdate = document.getElementById("launchStatus");
             launchStatusUpdate.innerHTML = "Shuttle is ready for launch"
             launchStatusUpdate.style.color = "green";
+
+            faultyItems.innerHTML = `
+            <ol id="checkList">
+            <li>Pilot ${pilotNameInput.value} is ready for launch.</li>
+            <li>Co-pilot ${copilotNameInput.value} is ready for launch.</li>
+            <li>Fuel level high enough for launch.</li>
+            <li>Cargo mass low enough for launch.</li>
+            </ol>`
             event.preventDefault();
          }
  
@@ -74,11 +83,5 @@ window.addEventListener("load", function() {
       alert("Please enter a name with no numbers for the Pilot and Co-pilot's names.");
       event.preventDefault();
       } 
-
    });
-
-
-
-
-
 });
