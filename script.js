@@ -53,13 +53,27 @@ window.addEventListener("load", function() {
 
             const checkList = document.getElementById("checkList");
 
-            if (fuelLevelInput.value < 10000) {
-            checkList.innerHTML += `<li>Fuel level too low for launch.</li>`;
+            if (fuelLevelInput.value < 10000 && cargoWeightInput.value <= 10000) {
+            checkList.innerHTML += `
+            <li>Fuel level too low for launch.</li>
+            <li>Cargo mass low enough for launch.</li>
+            `;
             event.preventDefault();
             }
 
-            if (cargoWeightInput.value > 10000) {
-               checkList.innerHTML += `<li>Cargo mass too high for launch.</li>`;
+            if (fuelLevelInput.value >= 10000 && cargoWeightInput.value > 10000) {
+               checkList.innerHTML += `
+               <li>Fuel level high enough for launch.</li>
+               <li>Cargo mass too high for launch.</li>
+               `;
+               event.preventDefault();
+            }
+
+            if (fuelLevelInput.value < 10000 && cargoWeightInput.value > 10000) {
+               checkList.innerHTML += `
+               <li>Fuel level too low for launch.</li>
+               <li>Cargo mass too high for launch.</li>
+               `;
                event.preventDefault();
             }
          } else {
